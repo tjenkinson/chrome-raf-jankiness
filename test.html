@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <style>
+      #test {
+        display: block;
+        position: absolute;
+        margin: 0;
+        padding: 0;
+        white-space: nowrap;
+        will-change: transform;
+        font-size: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="test">Contrary to popular belief, Lorem Ipsum is not simply random text</div>
+    <script>
+      (() => {
+        const el = document.getElementById('test');
+        requestAnimationFrame(function animate(time) {
+          const width = 800;
+          const frame = (time / 3) % (width * 2);
+          const x = frame > width ? (width * 2) - frame : frame;
+          requestAnimationFrame(animate);
+          el.style.transform = `translateX(${x}px)`;
+        });
+      })();
+    </script>
+  </body>
+</html>
