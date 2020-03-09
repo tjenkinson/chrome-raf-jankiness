@@ -17,9 +17,16 @@
     <script>
       (() => {
         const el = document.getElementById('test');
+        let offset;
         requestAnimationFrame(function animate(time) {
+          if (!offset) {
+            // synchronize start time
+            offset = Date.now() - time;
+          }
+
           const width = 800;
-          const frame = (time / 3) % (width * 2);
+          const frame = ((time + offset) / 3) % (width * 2);
+          
           const x = frame > width ? (width * 2) - frame : frame;
           requestAnimationFrame(animate);
           el.style.transform = `translateX(${x}px)`;
